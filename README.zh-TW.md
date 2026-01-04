@@ -44,32 +44,6 @@
 - **Let's Encrypt** SSL/TLS 憑證
 - **GitHub Actions** CI/CD 自動化部署
 
-## 🚀 快速開始
-
-### 環境需求
-
-- Docker & Docker Compose
-- Git
-
-### 本地開發
-
-```bash
-# 複製專案
-git clone https://github.com/SsuJ-Chang/pdfhero.git
-cd pdfhero
-
-# 啟動所有服務
-docker-compose up --build
-
-# 訪問應用程式
-# 前端: http://localhost:5173
-# 後端 API: http://localhost:8000
-```
-
-### 環境設定
-
-使用 Docker Compose 開箱即用，本地開發無需額外環境變數。
-
 ## 🏗️ 專案結構
 
 ```
@@ -119,7 +93,7 @@ pdfhero/
 本應用專為低規格基礎設施設計：
 
 ### AWS EC2 需求
-- **實例類型**：t3.micro 或 t2.micro
+- **實例類型**：t3.micro
 - **作業系統**：Ubuntu 22.04 LTS
 - **記憶體**：1GB + 2GB Swap
 - **儲存空間**：最少 10GB
@@ -134,8 +108,6 @@ git push origin main
 # ✅ 變更自動上線到 https://pdfhero.rj-tw.com
 ```
 
-詳細部署說明請參考 [docs/GITHUB_ACTIONS_SETUP.md](docs/GITHUB_ACTIONS_SETUP.md)
-
 ## 🧪 測試
 
 ```bash
@@ -145,22 +117,6 @@ docker-compose run backend pytest
 # 含覆蓋率報告
 docker-compose run backend pytest --cov=src
 ```
-
-## 📝 API 文件
-
-後端啟動後，訪問：
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## 🤝 貢獻
-
-歡迎貢獻！請隨時提交 Pull Request。
-
-1. Fork 本專案
-2. 建立功能分支 (`git checkout -b feature/驚人功能`)
-3. 提交變更 (`git commit -m '新增某個驚人功能'`)
-4. 推送到分支 (`git push origin feature/驚人功能`)
-5. 開啟 Pull Request
 
 ## 📄 授權
 

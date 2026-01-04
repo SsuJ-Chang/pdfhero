@@ -44,32 +44,6 @@
 - **Let's Encrypt** for SSL/TLS
 - **GitHub Actions** for CI/CD
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Docker & Docker Compose
-- Git
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/SsuJ-Chang/pdfhero.git
-cd pdfhero
-
-# Start all services
-docker-compose up --build
-
-# Access the application
-# Frontend: http://localhost:5173
-# Backend API: http://localhost:8000
-```
-
-### Environment Setup
-
-The application works out of the box with Docker Compose. No additional environment variables are required for local development.
-
 ## 🏗️ Project Structure
 
 ```
@@ -119,22 +93,10 @@ pdfhero/
 The application is designed to run on low-spec infrastructure:
 
 ### AWS EC2 Requirements
-- **Instance**: t3.micro or t2.micro
+- **Instance**: t3.micro
 - **OS**: Ubuntu 22.04 LTS
 - **RAM**: 1GB + 2GB Swap
 - **Storage**: 10GB minimum
-
-### Automated Deployment
-
-Every push to `main` branch triggers automatic deployment via GitHub Actions:
-
-```bash
-git push origin main
-# ☕ Wait ~60 seconds
-# ✅ Changes live at https://pdfhero.rj-tw.com
-```
-
-For detailed deployment instructions, see [docs/GITHUB_ACTIONS_SETUP.md](docs/GITHUB_ACTIONS_SETUP.md)
 
 ## 🧪 Testing
 
@@ -145,22 +107,6 @@ docker-compose run backend pytest
 # Run with coverage
 docker-compose run backend pytest --cov=src
 ```
-
-## 📝 API Documentation
-
-Once the backend is running, visit:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📄 License
 
