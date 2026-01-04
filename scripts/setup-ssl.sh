@@ -24,7 +24,6 @@ sudo apt-get install -y certbot python3-certbot-nginx
 echo "📜 申請 SSL 憑證..."
 sudo certbot --nginx \
     -d $DOMAIN \
-    -d www.$DOMAIN \
     --non-interactive \
     --agree-tos \
     --email $EMAIL \
