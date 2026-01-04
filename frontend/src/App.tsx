@@ -69,7 +69,7 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <div className="footer-meta">&copy; {new Date().getFullYear()} PDF Hero — Privacy First PDF Tools</div>
+        <div className="footer-meta">&copy; {new Date().getFullYear()} RJ PDF Hero. All rights reserved. Privacy Policy | Terms of Service</div>
       </footer>
     </div>
   )
