@@ -74,7 +74,8 @@ pdfhero/
 
 ### 資源優化
 - **低記憶體設計**：1GB RAM + 2GB Swap 即可運行
-- **併發控制**：使用 `asyncio.Semaphore` 避免記憶體溢位
+- **併發控制**：使用 `asyncio.Semaphore(3)` 針對 t3.micro 吞吐量優化
+- **頻率限制**：Nginx IP 限流 (1 req/s, burst 5) 防止惡意佔用
 - **精簡映像檔**：使用 slim 基礎映像減少資源佔用
 
 ### 桌面優先體驗

@@ -74,7 +74,8 @@ pdfhero/
 
 ### Resource Optimization
 - **Low-Memory Design**: Runs on 1GB RAM with 2GB swap
-- **Concurrency Control**: `asyncio.Semaphore` prevents OOM
+- **Concurrency Control**: `asyncio.Semaphore(3)` optimized for t3.micro throughput
+- **Rate Limiting**: Nginx IP-based throttling (1 req/s, burst 5) to prevent abuse
 - **Minimal Docker Images**: Using slim base images
 
 ### Desktop-First Experience
