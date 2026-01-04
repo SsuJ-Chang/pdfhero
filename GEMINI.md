@@ -53,7 +53,7 @@
 * AWS 環境準備 (Swap 設定)。
 * 設定 Nginx 與 HTTPS (Certbot)。
 * 設定 Sentry 監控。
-* 設定 Drone 自動部署。
+* 設定 Github Actions 自動部署。
 
 ## 6. 指令備忘 (Cheat Sheet)
 * 啟動本地開發：`docker-compose up --build`
