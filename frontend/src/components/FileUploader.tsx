@@ -22,13 +22,39 @@ export const FileUploader = () => {
     setStatus('converting');
     setErrorMessage('');
     setDownloadLink(null);
+
+    // GA4 Event: File Upload Started
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'file_upload', {
+        file_type: file.type,
+        file_size: file.size,
+        file_name: file.name.split('.').pop() // extension only
+      });
+    }
+
     try {
       const result = await convertFile(file);
       setStatus('success');
       setDownloadLink(result);
+
+      // GA4 Event: Conversion Success
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion_success', {
+          file_type: file.type,
+          output_filename: result.filename
+        });
+      }
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Unknown error');
+
+      // GA4 Event: Conversion Error
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion_error', {
+          error_message: error instanceof Error ? error.message : 'Unknown error',
+          file_type: file.type
+        });
+      }
     }
   };
 
