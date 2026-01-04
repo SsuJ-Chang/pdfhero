@@ -11,8 +11,9 @@ import tempfile
 
 router = APIRouter()
 
-# Concurrency Control: Limit to 2 concurrent conversions to prevent memory overload (OOM)
-CONVERSION_SEMAPHORE = asyncio.Semaphore(2)
+# Concurrency Control: Limit to 3 concurrent conversions to prevent memory overload (OOM)
+# Optimized for t3.micro with 2GB swap
+CONVERSION_SEMAPHORE = asyncio.Semaphore(3)
 
 def cleanup_temp_data(temp_dir: str):
     """Cleanup the temporary directory and all its contents."""
