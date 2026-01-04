@@ -6,6 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0', // Ensure binding to all interfaces
+    allowedHosts: [
+      'pdfhero.rj-tw.com',
+      'localhost',
+      '.rj-tw.com', // Allow all subdomains
+    ],
     proxy: {
       '/api': {
         target: 'http://backend:8000',
