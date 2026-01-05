@@ -13,7 +13,7 @@
 - 🔒 **Privacy First** - No database, files auto-deleted after conversion
 - 💰 **Forever Free** - Supported by ads, completely free for users
 - 🎨 **Modern UI** - Clean, dark-mode-first interface
-- 📱 **Desktop Optimized** - Designed for desktop users with mobile blocking
+- 📱 **Fully Responsive** - Works on desktop, tablet, and mobile devices
 - 🌐 **No Registration** - Use immediately without sign-up
 
 ## 🎯 Supported Conversions
@@ -78,8 +78,8 @@ pdfhero/
 - **Rate Limiting**: Nginx IP-based throttling (1 req/s, burst 5) to prevent abuse
 - **Minimal Docker Images**: Using slim base images
 
-### Desktop-First Experience
-- **Mobile Blocking**: Redirect mobile users with friendly message
+### Responsive Experience
+- **Mobile Support**: Fully responsive design for all screen sizes
 - **Drag & Drop**: Intuitive file upload
 - **Dark Mode**: Eye-friendly default theme
 

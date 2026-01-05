@@ -97,7 +97,6 @@ export const FileUploader = () => {
             <input type="file" className="hidden" onChange={handleChange} accept=".jpg,.jpeg,.png,.doc,.docx" />
           </label>
           <div className="limit-row">
-            <span>Desktop only</span>
             <span>Max 10MB</span>
             <span>PDF output</span>
           </div>

@@ -1,32 +1,9 @@
-import { useEffect, useState } from 'react'
 import { FileUploader } from './components/FileUploader'
 import { useTheme } from './context/ThemeContext'
 import './App.css'
 
 function App() {
-  const [isMobile, setIsMobile] = useState(false)
   const { theme, toggleTheme } = useTheme()
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024)
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  if (isMobile) {
-    return (
-      <div className="mobile-blocker">
-        <div className="glass-card p-6 text-center">
-          <h1 className="text-xl font-bold mb-3">Desktop Only</h1>
-          <p className="text-slate-400 text-sm">Please use a screen width of 1024px or wider for the best experience.</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="app-shell">
