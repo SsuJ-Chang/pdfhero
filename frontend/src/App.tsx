@@ -46,7 +46,7 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <div className="footer-meta">&copy; {new Date().getFullYear()} RJ PDF Hero. All rights reserved. Privacy Policy | Terms of Service</div>
+        <div className="footer-meta">&copy; {new Date().getFullYear()} RJ. All rights reserved.</div>
       </footer>
     </div>
   )
