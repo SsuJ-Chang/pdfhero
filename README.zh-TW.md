@@ -1,139 +1,148 @@
-# PDF Hero (PDF 救星)
+# PDF Hero
 
-> **永久免費、隱私優先的 PDF 轉檔工具**
+> 本機優先、重視隱私的 PDF 轉換工具，可將圖片與 Word 文件轉成 PDF。
 
 繁體中文 | [English](./README.md)
 
-[![線上展示](https://img.shields.io/badge/demo-線上展示-success)](https://pdfhero.rj-tw.com)
 [![授權](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![狀態](https://img.shields.io/badge/hosting-offline-lightgrey)](#專案狀態)
 
-## ✨ 特色功能
+## 專案狀態
 
-- 🚀 **極速轉換** - 秒級完成圖片與 Word 文件轉 PDF
-- 🔒 **隱私至上** - 無資料庫，檔案轉換後立即刪除
-- 💰 **永久免費** - 廣告支持，完全免費使用
-- 🎨 **現代化介面** - 簡潔優雅，預設深色模式
-- 📱 **全裝置支援** - 桌機、平板、手機皆可使用
-- 🌐 **免註冊** - 立即使用，無需登入
+PDF Hero 目前已經沒有公開部署。
 
-## 🎯 支援的轉換格式
+原本部署在 AWS EC2 上的服務，以及 `pdfhero.rj-tw.com` 網域對應的線上版本，已經停止使用。這個 repo 目前保留作為作品集與本機開發專案，仍然可以用 Docker Compose 在本機跑起來。
+
+## 功能
+
+- **快速轉換**：將圖片與 Word 文件轉成 PDF。
+- **重視隱私的架構**：沒有資料庫；上傳檔案只在轉換流程中暫時處理。
+- **不需要註冊流程**：設計上可直接使用。
+- **現代化介面**：React 介面，支援響應式版面與深色系樣式。
+- **本機 Docker 環境**：前端與後端可以透過 Docker Compose 一起啟動。
+
+## 支援轉換格式
 
 | 來源格式 | 目標格式 | 狀態 |
-|---------|---------|------|
-| 圖片 (PNG, JPG, JPEG, WebP) | PDF | ✅ 已支援 |
-| Word 文件 (DOC, DOCX) | PDF | ✅ 已支援 |
-| Excel 試算表 | PDF | 🔜 即將推出 |
-| PowerPoint 簡報 | PDF | 🔜 即將推出 |
+| --- | --- | --- |
+| 圖片（PNG、JPG、JPEG、WebP） | PDF | 已支援 |
+| Word 文件（DOC、DOCX） | PDF | 已支援 |
+| Excel 試算表 | PDF | 規畫中 |
+| PowerPoint 簡報 | PDF | 規畫中 |
 
-## 🛠️ 技術堆疊
+## 技術棧
 
 ### 前端
-- **React 18** with TypeScript
-- **Vite** 極速開發工具
-- **Tailwind CSS** 樣式框架
+
+- **React** 搭配 TypeScript
+- **Vite** 作為開發與建置工具
+- **Tailwind CSS** 負責樣式
 
 ### 後端
-- **FastAPI** (Python 3.11+)
-- **LibreOffice Headless** 文件轉換引擎
-- **Pillow** 圖片處理函式庫
 
-### 基礎架構
-- **Docker & Docker Compose** 容器化
-- **AWS EC2** 雲端主機
-- **Nginx** 反向代理
-- **Let's Encrypt** SSL/TLS 憑證
-- **GitHub Actions** CI/CD 自動化部署
+- **FastAPI**（Python 3.11+）
+- **LibreOffice Headless** 處理文件轉換
+- **Pillow** 處理圖片轉換
 
-## 🏗️ 專案結構
+### 本機基礎建設
 
-```
+- **Docker**
+- **Docker Compose**
+
+## 專案結構
+
+```text
 pdfhero/
-├── backend/             # FastAPI 後端
+├── backend/                # FastAPI 後端
 │   ├── src/
-│   │   ├── domain/     # 業務實體與介面
-│   │   ├── use_cases/  # 應用邏輯
+│   │   ├── domain/         # 業務實體與介面
+│   │   ├── use_cases/      # 應用邏輯
 │   │   ├── infrastructure/ # 轉換器實作
-│   │   └── adapters/   # API 控制器
-│   └── tests/          # 單元測試
-├── frontend/           # React 前端
+│   │   └── adapters/       # API 控制器
+│   └── tests/              # 單元測試
+├── frontend/               # React 前端
 │   ├── src/
-│   │   ├── components/ # React 元件
-│   │   ├── api/       # API 客戶端
-│   │   └── contexts/  # React 上下文
-│   └── public/        # 靜態資源
-├── nginx/             # Nginx 配置
-└── scripts/           # 部署腳本
+│   │   ├── components/     # React 元件
+│   │   ├── api/            # API client
+│   │   └── context/        # React context providers
+│   └── public/             # 靜態資源
+├── nginx/                  # 已封存的 Nginx 設定
+└── scripts/                # 已封存的部署輔助腳本
 ```
 
-## 🎨 設計理念
+## 設計筆記
 
-### 隱私優先架構
-- **無資料庫**：所有轉換在記憶體中完成
-- **自動清理**：暫存檔案下載後立即刪除
-- **零追蹤**：不儲存用戶資料（分析除外）
+### 重視隱私的架構
 
-### 資源優化
-- **低記憶體設計**：1GB RAM + 2GB Swap 即可運行
-- **併發控制**：使用 `asyncio.Semaphore(3)` 針對 t3.micro 吞吐量優化
-- **頻率限制**：Nginx IP 限流 (1 req/s, burst 5) 防止惡意佔用
-- **精簡映像檔**：使用 slim 基礎映像減少資源佔用
+- **沒有資料庫**：轉換請求不會保存使用者帳號或檔案紀錄。
+- **暫時處理檔案**：檔案只在轉換請求期間使用。
+- **簡單的執行邊界**：前端透過 `/api` 路徑呼叫 FastAPI 後端。
 
-### 響應式體驗
-- **手機支援**：全尺寸螢幕皆可使用
-- **拖放上傳**：直覺的檔案上傳體驗
-- **深色模式**：護眼的預設主題
+### 資源使用最佳化
 
-## 📊 分析與營利
+- **低規格部署目標**：原本的部署曾經針對低規格 EC2 instance 調整。
+- **併發控制**：後端轉換工作有 semaphore 限制。
+- **容器化服務**：Docker 讓前後端環境比較容易重現。
 
-- **Google Analytics 4**：自定義事件追蹤轉換行為
-- **Google AdSense**：自動廣告營利
-- **SEO 優化**：完整的 meta 標籤與網站地圖
+## 本機開發
 
-## 🚢 部署
-
-本應用專為低規格基礎設施設計：
-
-### AWS EC2 需求
-- **實例類型**：t3.micro
-- **作業系統**：Ubuntu 22.04 LTS
-- **記憶體**：1GB + 2GB Swap
-- **儲存空間**：最少 10GB
-
-### 自動化部署
-
-每次推送到 `main` 分支會透過 GitHub Actions 自動部署：
+啟動完整服務：
 
 ```bash
-git push origin main
-# ☕ 等待約 60 秒
-# ✅ 變更自動上線到 https://pdfhero.rj-tw.com
+docker-compose up --build
 ```
 
-## 🧪 測試
+本機網址：
+
+| 服務 | URL |
+| --- | --- |
+| 前端 | `http://localhost:5173` |
+| 後端 | `http://localhost:8000` |
+
+停止服務：
+
+```bash
+docker-compose down
+```
+
+## 測試
 
 ```bash
 # 執行單元測試
 docker-compose run backend pytest
 
-# 含覆蓋率報告
+# 執行測試並產生 coverage
 docker-compose run backend pytest --cov=src
 ```
 
-## 📄 授權
+## 已封存的部署紀錄
 
-本專案採用 MIT 授權 - 詳見 [LICENSE](LICENSE) 檔案
+PDF Hero 以前使用過以下正式環境：
 
-## 🙏 致謝
+- AWS EC2
+- Docker Compose
+- Nginx reverse proxy
+- Let's Encrypt SSL/TLS
+- GitHub Actions SSH 部署
+- 網域：`pdfhero.rj-tw.com`
 
-- 由 [RJ Chang](https://github.com/SsuJ-Chang) 用 ❤️ 打造
-- 基於開源技術構建
-- 特別感謝 FastAPI 與 React 社群
+這條部署路徑目前已經停用。以下檔案只保留作為歷史參考：
 
-## 📧 聯絡方式
+| 檔案 | 用途 |
+| --- | --- |
+| `.github/workflows/deploy.yml` | 已封存的 EC2 部署 workflow |
+| `scripts/deploy.sh` | 舊的伺服器端部署腳本 |
+| `scripts/setup-nginx.sh` | 舊的 Nginx 設定輔助腳本 |
+| `scripts/setup-ssl.sh` | 舊的 Let's Encrypt 設定輔助腳本 |
+| `scripts/setup-domain-redirect.sh` | 舊的網域轉址輔助腳本 |
+| `nginx/pdfhero.conf` | 舊的 Nginx reverse proxy 設定 |
 
-- 網站：[pdfhero.rj-tw.com](https://pdfhero.rj-tw.com)
+如果未來要重新部署，需要先準備新的伺服器與網域，再評估是否沿用這些封存檔案。
+
+## 授權
+
+本專案使用 MIT License。詳細內容請見 [LICENSE](LICENSE)。
+
+## 聯絡
+
 - GitHub：[@SsuJ-Chang](https://github.com/SsuJ-Chang)
-
----
-
-**⭐ 如果您覺得這個專案有用，請考慮給它一顆星星！**

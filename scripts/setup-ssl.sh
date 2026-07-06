@@ -1,4 +1,6 @@
 #!/bin/bash
+# ARCHIVED DEPLOYMENT NOTE: The previous AWS EC2 deployment was terminated. This file is kept for historical reference only.
+
 # PDF Hero - SSL 憑證安裝腳本
 
 set -e

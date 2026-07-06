@@ -1,4 +1,6 @@
 #!/bin/bash
+# ARCHIVED DEPLOYMENT NOTE: The previous AWS EC2 deployment was terminated. This file is kept for historical reference only.
+
 # 為主域名 rj-tw.com 設定跳轉到 pdfhero.rj-tw.com
 
 set -e

@@ -5,17 +5,16 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '0.0.0.0', // Ensure binding to all interfaces
+    host: '0.0.0.0',
     allowedHosts: [
-      'pdfhero.rj-tw.com',
       'localhost',
-      '.rj-tw.com', // Allow all subdomains
+      '127.0.0.1',
     ],
     proxy: {
       '/api': {
         target: 'http://backend:8000',
         changeOrigin: true,
-      }
-    }
-  }
+      },
+    },
+  },
 })

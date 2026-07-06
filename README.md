@@ -1,129 +1,148 @@
 # PDF Hero
 
-> **A Free, Privacy-First PDF Conversion Tool**
+> A local-first, privacy-minded PDF conversion tool for images and Word documents.
 
 [繁體中文](./README.zh-TW.md) | English
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://pdfhero.rj-tw.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/hosting-offline-lightgrey)](#project-status)
 
-## ✨ Features
+## Project Status
 
-- 🚀 **Lightning Fast** - Convert images and Word documents to PDF in seconds
-- 🔒 **Privacy First** - No database, files auto-deleted after conversion
-- 💰 **Forever Free** - Supported by ads, completely free for users
-- 🎨 **Modern UI** - Clean, dark-mode-first interface
-- 📱 **Fully Responsive** - Works on desktop, tablet, and mobile devices
-- 🌐 **No Registration** - Use immediately without sign-up
+PDF Hero is no longer hosted publicly.
 
-## 🎯 Supported Conversions
+The previous AWS EC2 instance and `pdfhero.rj-tw.com` deployment have been terminated. This repository is kept as a portfolio and local development project. You can still run the application locally with Docker Compose.
+
+## Features
+
+- **Fast conversion** - Convert images and Word documents to PDF.
+- **Privacy-minded architecture** - No database; uploaded files are processed temporarily.
+- **No registration flow** - The app is designed for direct use.
+- **Modern UI** - React-based interface with responsive layout and dark-mode styling.
+- **Local Docker setup** - Frontend and backend can run together with Docker Compose.
+
+## Supported Conversions
 
 | From | To | Status |
-|------|-----|--------|
-| Images (PNG, JPG, JPEG, WebP) | PDF | ✅ |
-| Word Documents (DOC, DOCX) | PDF | ✅ |
-| Excel Spreadsheets | PDF | 🔜 Coming Soon |
-| PowerPoint Presentations | PDF | 🔜 Coming Soon |
+| --- | --- | --- |
+| Images (PNG, JPG, JPEG, WebP) | PDF | Supported |
+| Word Documents (DOC, DOCX) | PDF | Supported |
+| Excel Spreadsheets | PDF | Planned |
+| PowerPoint Presentations | PDF | Planned |
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- **React 18** with TypeScript
-- **Vite** for blazing-fast development
+
+- **React** with TypeScript
+- **Vite** for development and builds
 - **Tailwind CSS** for styling
 
 ### Backend
+
 - **FastAPI** (Python 3.11+)
 - **LibreOffice Headless** for document conversion
 - **Pillow** for image processing
 
-### Infrastructure
-- **Docker & Docker Compose** for containerization
-- **AWS EC2** for hosting
-- **Nginx** as reverse proxy
-- **Let's Encrypt** for SSL/TLS
-- **GitHub Actions** for CI/CD
+### Local Infrastructure
 
-## 🏗️ Project Structure
+- **Docker**
+- **Docker Compose**
 
-```
+## Project Structure
+
+```text
 pdfhero/
-├── backend/             # FastAPI backend
+├── backend/                # FastAPI backend
 │   ├── src/
-│   │   ├── domain/     # Business entities & interfaces
-│   │   ├── use_cases/  # Application logic
-│   │   ├── infrastructure/ # Converters implementation
-│   │   └── adapters/   # API controllers
-│   └── tests/          # Unit tests
-├── frontend/           # React frontend
+│   │   ├── domain/         # Business entities and interfaces
+│   │   ├── use_cases/      # Application logic
+│   │   ├── infrastructure/ # Converter implementations
+│   │   └── adapters/       # API controllers
+│   └── tests/              # Unit tests
+├── frontend/               # React frontend
 │   ├── src/
-│   │   ├── components/ # React components
-│   │   ├── api/       # API client
-│   │   └── contexts/  # React contexts
-│   └── public/        # Static assets
-├── nginx/             # Nginx configuration
-└── scripts/           # Deployment scripts
+│   │   ├── components/     # React components
+│   │   ├── api/            # API client
+│   │   └── context/        # React context providers
+│   └── public/             # Static assets
+├── nginx/                  # Archived Nginx configuration
+└── scripts/                # Archived deployment helper scripts
 ```
 
-## 🎨 Design Philosophy
+## Design Notes
 
-### Privacy-First Architecture
-- **No Database**: All conversions happen in-memory
-- **Auto-Cleanup**: Temporary files deleted immediately after download
-- **Zero Tracking**: No user data stored (except analytics)
+### Privacy-Minded Architecture
+
+- **No database**: Conversion requests do not persist user accounts or file records.
+- **Temporary processing**: Files are only needed during the conversion request.
+- **Simple runtime boundary**: The frontend calls the FastAPI backend through the `/api` route.
 
 ### Resource Optimization
-- **Low-Memory Design**: Runs on 1GB RAM with 2GB swap
-- **Concurrency Control**: `asyncio.Semaphore(3)` optimized for t3.micro throughput
-- **Rate Limiting**: Nginx IP-based throttling (1 req/s, burst 5) to prevent abuse
-- **Minimal Docker Images**: Using slim base images
 
-### Responsive Experience
-- **Mobile Support**: Fully responsive design for all screen sizes
-- **Drag & Drop**: Intuitive file upload
-- **Dark Mode**: Eye-friendly default theme
+- **Small deployment target**: The original deployment was tuned for a low-spec EC2 instance.
+- **Concurrency control**: Backend conversion work is guarded by a semaphore.
+- **Containerized services**: Docker keeps frontend and backend setup reproducible.
 
-## 📊 Analytics & Monetization
+## Local Development
 
-- **Google Analytics 4**: Custom event tracking for conversions
-- **Google AdSense**: Auto Ads for revenue
-- **SEO Optimized**: Comprehensive meta tags and sitemap
+Start the full stack:
 
-## 🚢 Deployment
+```bash
+docker-compose up --build
+```
 
-The application is designed to run on low-spec infrastructure:
+Local URLs:
 
-### AWS EC2 Requirements
-- **Instance**: t3.micro
-- **OS**: Ubuntu 22.04 LTS
-- **RAM**: 1GB + 2GB Swap
-- **Storage**: 10GB minimum
+| Service | URL |
+| --- | --- |
+| Frontend | `http://localhost:5173` |
+| Backend | `http://localhost:8000` |
 
-## 🧪 Testing
+Stop the stack:
+
+```bash
+docker-compose down
+```
+
+## Testing
 
 ```bash
 # Run unit tests
 docker-compose run backend pytest
 
-# Run with coverage
+# Run unit tests with coverage
 docker-compose run backend pytest --cov=src
 ```
 
-## 📄 License
+## Archived Deployment Notes
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+PDF Hero previously used the following production setup:
 
-## 🙏 Acknowledgments
+- AWS EC2
+- Docker Compose
+- Nginx reverse proxy
+- Let's Encrypt SSL/TLS
+- GitHub Actions SSH deployment
+- Domain: `pdfhero.rj-tw.com`
 
-- Built with ❤️ by [RJ Chang](https://github.com/SsuJ-Chang)
-- Powered by open-source technologies
-- Special thanks to the FastAPI and React communities
+That deployment path is no longer active. These files are kept only as historical reference:
 
-## 📧 Contact
+| File | Purpose |
+| --- | --- |
+| `.github/workflows/deploy.yml` | Archived EC2 deployment workflow |
+| `scripts/deploy.sh` | Old server-side deployment script |
+| `scripts/setup-nginx.sh` | Old Nginx setup helper |
+| `scripts/setup-ssl.sh` | Old Let's Encrypt setup helper |
+| `scripts/setup-domain-redirect.sh` | Old domain redirect helper |
+| `nginx/pdfhero.conf` | Old Nginx reverse proxy config |
 
-- Website: [pdfhero.rj-tw.com](https://pdfhero.rj-tw.com)
+Provision a new server and domain before reusing any archived deployment files.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Contact
+
 - GitHub: [@SsuJ-Chang](https://github.com/SsuJ-Chang)
-
----
-
-**⭐ If you find this project useful, please consider giving it a star!**

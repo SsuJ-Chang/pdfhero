@@ -1,4 +1,6 @@
 #!/bin/bash
+# ARCHIVED DEPLOYMENT NOTE: The previous AWS EC2 deployment was terminated. This file is kept for historical reference only.
+
 # PDF Hero - Nginx 配置部署腳本
 
 set -e
